@@ -7,6 +7,10 @@ var speed :float = 10;
 var rightWingAnimator : Animator;
 var leftWingAnimator : Animator;
 var centerAnimator : Animator;
+var turbinesAnimator : Animator;
+var damageRightWingAnimator : Animator;
+var damageLeftWingAnimator : Animator;
+var damageCenterAnimator : Animator;
 
 public var bullet : GameObject;
 
@@ -63,10 +67,10 @@ function Update() {
 
   if (Input.GetKey(KeyCode.LeftArrow)) {
     statusX = 4;
-    adjustShootX = -0.04;
+    adjustShootX = -0.16;
   } else if (Input.GetKey(KeyCode.RightArrow)) {
     statusX = 6;
-    adjustShootX = 0.04;
+    adjustShootX = 0.16;
   };
 
   if (Input.GetKey(KeyCode.UpArrow)) {
@@ -75,13 +79,14 @@ function Update() {
     statusY = 8;
   };
 
-  position.y = position.y + .1;
+  position.y = position.y + .4;
   position.x = position.x + adjustShootX;
 
   if (Input.GetKeyDown("space")) {
     // Create a new bullet at “transform.position”
     // Which is the current position of the ship
     Instantiate(bullet, position, Quaternion.identity);
+    speed = speed / 4;
   }
 
   speed = speed + .5;
@@ -94,4 +99,8 @@ function Update() {
   leftWingAnimator.SetInteger ("horizontal", statusX);
   rightWingAnimator.SetInteger ("horizontal", statusX);
   centerAnimator.SetInteger ("horizontal", statusX);
+  damageRightWingAnimator.SetInteger ("horizontal", statusX);
+  damageLeftWingAnimator.SetInteger ("horizontal", statusX);
+  damageCenterAnimator.SetInteger ("horizontal", statusX);
+  turbinesAnimator.SetInteger("vertical", statusY);
 }
