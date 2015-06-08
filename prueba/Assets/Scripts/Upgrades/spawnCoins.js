@@ -13,10 +13,7 @@ function Start () {
 function OnDestroy () {
 	print("Script was destroyed");
 
-	Debug.Log(vertExtent);
-	Debug.Log(transform.position.y);
-
-  if (transform.position.y > -vertExtent) {
+  if (transform.position.y > -vertExtent && transform.position.x > -9.5 && transform.position.x < 0) {
   	var x1 = transform.position.x - xSize;
 	  var x2 = transform.position.x + xSize;
 	  var y1 = transform.position.y - ySize;

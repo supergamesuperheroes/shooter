@@ -1,7 +1,6 @@
 ﻿// Public variable that contains the speed of the enemy
 public var speed : float;
 
-
 // Function called when the enemy is created
 function Start () {  
     // Add a vertical speed to the enemy
@@ -13,13 +12,15 @@ function OnBecameInvisible() {
   Destroy(gameObject);
 }
 
-function OnTriggerEnter2D(obj : Collider2D) {  
+function OnTriggerEnter2D(obj : Collider2D) { 
+    var ship = obj.gameObject;
     var name = obj.gameObject.name;
     // If it collided with a bullet
     if (name == "ship") {
       
         // Destroy itself (the enemy)
         Destroy(gameObject);
+        ship.GetComponent(healthShip).coinsGrabbed = ship.GetComponent(healthShip).coinsGrabbed + 1;
 
     }
 }
