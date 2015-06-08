@@ -1,5 +1,6 @@
 ﻿
 public var health :int;
+public var coinsGrabbed :int;
 public var death : GameObject;
 var damageRightWingAnimator : Animator;
 var damageLeftWingAnimator : Animator;
@@ -16,7 +17,7 @@ function Update () {
 function OnTriggerEnter2D(obj : Collider2D) {  
     var type = obj.gameObject.tag;
     var position = this.transform.position;
-    Debug.Log(type);
+    Debug.Log(coinsGrabbed);
     if (type == "damage") {
     	health--;
     	Destroy(obj.gameObject);

@@ -1,6 +1,8 @@
 ﻿
 var statusX :int = 5;
 var statusY :int = 5;
+var shoot :int = 0;
+var shootSpeed :int = 10;
 var maxSpeed :float = 10;
 var speed :float = 10;
 
@@ -15,7 +17,8 @@ var damageCenterAnimator : Animator;
 public var bullet : GameObject;
 
 private var vertExtent : float;
-private var horzExtent : float;
+private var horzExtentLeft : float;
+private var horzExtentRight : float;
 private var rend: Renderer;
 private var width :float;
 private var height :float;
@@ -23,9 +26,11 @@ private var height :float;
 private var pastStatusX :int = 5;
 private var pastStatusY :int = 5;
 
+
 function Start () {
   vertExtent = Camera.main.GetComponent.<Camera>().orthographicSize;    
-  horzExtent = vertExtent * Screen.width / Screen.height;
+  horzExtentLeft = 9.5;
+  horzExtentRight = 0;
   rend = GetComponent.<Renderer>(); 
   width = (GetComponent.<Renderer>().bounds.size.x) / 2;
   height = (GetComponent.<Renderer>().bounds.size.y) / 2;
@@ -49,11 +54,11 @@ function Update() {
   var adjustShootX = -0.01;
 
   position = this.transform.position;
-  if (position.x < (width - horzExtent)) {
-      position.x = width - horzExtent;
+  if (position.x < (width - horzExtentLeft)) {
+      position.x = width - horzExtentLeft;
   }
-  if (position.x > (horzExtent - width)) {
-      position.x = horzExtent - width;
+  if (position.x > (horzExtentRight - width)) {
+      position.x = horzExtentRight - width;
   }
   
   if (position.y > (vertExtent - height)) {
@@ -82,12 +87,17 @@ function Update() {
   position.y = position.y + .4;
   position.x = position.x + adjustShootX;
 
-  if (Input.GetKeyDown("space")) {
-    // Create a new bullet at “transform.position”
-    // Which is the current position of the ship
-    Instantiate(bullet, position, Quaternion.identity);
-    speed = speed / 4;
-  }
+  if (shoot > shootSpeed) {
+    if (Input.GetKey("space")) {
+      // Create a new bullet at “transform.position”
+      // Which is the current position of the ship
+      Instantiate(bullet, position, Quaternion.identity);
+      speed = speed / 4;
+      shoot = 0;
+    }
+  } else {
+    shoot++;
+  };
 
   speed = speed + .5;
   speed = speed > maxSpeed ? maxSpeed : speed;
@@ -103,4 +113,5 @@ function Update() {
   damageLeftWingAnimator.SetInteger ("horizontal", statusX);
   damageCenterAnimator.SetInteger ("horizontal", statusX);
   turbinesAnimator.SetInteger("vertical", statusY);
+  turbinesAnimator.SetInteger("horizontal", statusX);
 }
