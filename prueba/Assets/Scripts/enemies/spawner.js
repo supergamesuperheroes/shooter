@@ -1,6 +1,7 @@
 ﻿// Variable to store the enemy prefab
 public var seekerEnemy : GameObject;
 public var horseEnemy : GameObject;
+public var roboto : GameObject;
 
 // Variable to know how fast we should create new enemies
 public var spawnTime : float = 2;
@@ -28,6 +29,8 @@ function addEnemy() {
     Debug.Log(selectEnemy);
 
     if (selectEnemy > 0) {
+        clone = Instantiate(roboto, spawnPoint, Quaternion.identity);
+    } else if (selectEnemy > -1) {
         clone = Instantiate(horseEnemy, spawnPoint, Quaternion.identity);
         clone.GetComponent(spawnCoins).numberOfCoins = Mathf.Floor(Random.Range(1, 8));
         clone.GetComponent(lshooter).timeChange = Random.Range(1, 2.1);
