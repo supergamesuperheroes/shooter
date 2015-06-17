@@ -17,7 +17,7 @@ function Update () {
 function OnTriggerEnter2D(obj : Collider2D) {  
     var type = obj.gameObject.tag;
     var position = this.transform.position;
-    Debug.Log(coinsGrabbed);
+    
     if (type == "damage") {
     	health--;
     	Destroy(obj.gameObject);
@@ -39,7 +39,10 @@ function OnTriggerEnter2D(obj : Collider2D) {
 		    	damageRightWingAnimator.SetBool ("onOff", true);
 	        break;
 		    case 0:
-		    	Instantiate(death, position, Quaternion.identity);
+		    	var clone = Instantiate(death, position, Quaternion.identity);
+		    	Debug.Log("coinsGrabbed");
+		    	Debug.Log(coinsGrabbed);
+		    	clone.GetComponent(gameOver).score = coinsGrabbed;
 		    	Destroy(gameObject);
 	        break;
 		    default:

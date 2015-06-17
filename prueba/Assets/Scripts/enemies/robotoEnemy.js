@@ -20,8 +20,6 @@ function Update () {
 	if ( GameObject.FindGameObjectWithTag("Player") != null) {
 		var positionXPlayer = GameObject.FindGameObjectWithTag("Player").transform.position.x;
 	  var positionXRoboto = GetComponent.<Rigidbody2D>().transform.position.x;
-	  Debug.Log(positionXPlayer);
-	  Debug.Log(positionXRoboto);
 	  if (GetComponent.<Rigidbody2D>().transform.position.y < 4) {
 		  if (positionXPlayer < positionXRoboto + .3  && positionXPlayer > positionXRoboto -.3 ) {
 		  	robotoAnimator.SetBool("jump", true);

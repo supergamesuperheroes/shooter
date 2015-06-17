@@ -1,8 +1,11 @@
 ﻿#pragma strict
 
 public var loadingImage : GameObject;
+var userName : String;
+var inputField : UnityEngine.UI.InputField;
 
-public function LoadScene(scene : int ) {
+function startGame () {
+	PlayerPrefs.SetString("Player", inputField.text);
 	loadingImage.SetActive(true);
-	Application.LoadLevel(scene);
+	Application.LoadLevel(1);
 }

@@ -19,8 +19,8 @@ function OnTriggerEnter2D(obj : Collider2D) {
     if (name == "ship") {
       
         // Destroy itself (the enemy)
-        Destroy(gameObject);
         ship.GetComponent(healthShip).coinsGrabbed = ship.GetComponent(healthShip).coinsGrabbed + 1;
+        Destroy(gameObject);
 
     }
 }

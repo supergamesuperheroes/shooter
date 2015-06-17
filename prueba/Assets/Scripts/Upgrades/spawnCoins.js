@@ -11,7 +11,6 @@ function Start () {
 }
 
 function OnDestroy () {
-	print("Script was destroyed");
 
   if (transform.position.y > -vertExtent && transform.position.x > -9.5 && transform.position.x < 0) {
   	var x1 = transform.position.x - xSize;
@@ -33,7 +32,7 @@ function OnDestroy () {
 
 
 static function SafeInstantiate (original : Object, position : Vector3, rotation : Quaternion) : Object { 
-	if (isShuttingDown) return null; 
+	if (isShuttingDown || GameObject.FindGameObjectWithTag("gameOver")) return null; 
 	else return Instantiate(original, position, rotation); 
 }
 
