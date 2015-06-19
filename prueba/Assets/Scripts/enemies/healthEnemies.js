@@ -13,11 +13,10 @@ function OnBecameInvisible() {
 }
 
 function OnTriggerEnter2D(obj : Collider2D) {  
-    var name = obj.gameObject.name;
     var tag = obj.gameObject.tag;
     
     // If it collided with a bullet
-    if (name == "bullet1(Clone)") {
+    if (tag == "bullet") {
         health--;
         var colorShip : float = damageColor * (health - 1);
         if (health < 1) {
