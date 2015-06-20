@@ -1,10 +1,13 @@
 ﻿var health : int;
 private var damageColor : float;
+private var colorShip : float = 1;
+private var flagFlash : boolean = true;
 
 function Start() {
     if (health > 1) {
         damageColor = 1f / (health - 1f);
     };
+    InvokeRepeating("flashColor", .1, .1);
 };
 
 function OnBecameInvisible() {  
@@ -18,17 +21,22 @@ function OnTriggerEnter2D(obj : Collider2D) {
     // If it collided with a bullet
     if (tag == "bullet") {
         health--;
-        var colorShip : float = damageColor * (health - 1);
+        colorShip = damageColor * (health - 1);
         if (health < 1) {
             // Destroy itself (the enemy)
             Destroy(gameObject);
         };
-        gameObject.GetComponent("SpriteRenderer").color = new Color(1, colorShip, colorShip, 1);
-        // And destroy the bullet
         Destroy(obj.gameObject);
+        // And destroy the bullet
+        
 
     }
     if (tag == "spawner") {
     	Destroy(gameObject);
     };
+}
+
+function flashColor() {
+	flagFlash = !flagFlash;
+	gameObject.GetComponent("SpriteRenderer").color = flagFlash ? new Color(1, colorShip, colorShip, 1) : new Color(1, 1, 1, 1);
 }
